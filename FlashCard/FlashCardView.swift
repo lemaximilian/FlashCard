@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FlashCardView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
-    var flashCard: FlashCardModel.Playlist.FlashCard
+    var flashCard: FlashCardModel.FlashCard
     
     var body: some View {
         GeometryReader { geometry in

@@ -9,7 +9,7 @@ import SwiftUI
 
 class FlashCardViewModel: ObservableObject {
     typealias Playlist = FlashCardModel.Playlist
-    typealias FlashCard = FlashCardModel.Playlist.FlashCard
+    typealias FlashCard = FlashCardModel.FlashCard
     
     @Published private var model = FlashCardModel()
     var playlistID = 0

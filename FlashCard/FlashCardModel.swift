@@ -39,28 +39,31 @@ struct FlashCardModel {
         mutating func editPlaylistName(newName: String) {
             
         }
+
+    }
         
-        struct FlashCard: Identifiable {
-            let id: Int
-            var frontContent: String = "front"
-            var backContent: String = "back"
-            var isFlipped: Bool = false
-            
-            init(_ id: Int) {
-                self.id = id
-            }
-            
-            mutating func flipFlashCard() {
-                isFlipped.toggle()
-            }
-            
-            mutating func editFlashCard(editContent: String) {
-                if isFlipped == false {
-                    frontContent = editContent
-                } else {
-                    backContent = editContent
-                }
+    struct FlashCard: Identifiable {
+        let id: Int
+        var frontContent: String = "front"
+        var backContent: String = "back"
+        var isFlipped: Bool = false
+        
+        init(_ id: Int) {
+            self.id = id
+        }
+        
+        mutating func flipFlashCard() {
+            isFlipped.toggle()
+        }
+        
+        mutating func editFlashCard(editContent: String) {
+            if isFlipped == false {
+                frontContent = editContent
+            } else {
+                backContent = editContent
             }
         }
+        
     }
+    
 }
