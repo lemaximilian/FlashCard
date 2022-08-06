@@ -52,7 +52,10 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
                                 .onTapGesture {
                                     viewModel.playlistID = playlistID
                                     viewModel.flashCardID = flashCard.id
-                                    viewModel.flipFlashCard()
+                                    withAnimation {
+//                                        viewModel.editFlashCard()
+                                        viewModel.flipFlashCard()
+                                    }
                                 }
                         }
                     }

@@ -36,5 +36,9 @@ class FlashCardViewModel: ObservableObject {
     func flipFlashCard() {
         flashCards[flashCardID].flipFlashCard()
     }
+    
+    func editFlashCard() {
+        flashCards[flashCardID].editFlashCard()
+    }
 }
 

@@ -18,20 +18,27 @@ struct FlashCardView: View { // Lernkarten-View, zeigt die Vorderseite bzw. die 
                     .fill()
                     .foregroundColor(.blue)
                 if flashCard.isFlipped == false {
-                    shape
-                    Text(flashCard.frontContent) // Inhalt Vorderseite
-                        .minimumScaleFactor(DrawingConstants.minimumScaleFactor)
-                        .font(font(in: geometry.size))
-                        .padding()
+                        shape
+                        Text(flashCard.frontContent) // Inhalt Vorderseite
+                            .minimumScaleFactor(DrawingConstants.minimumScaleFactor)
+                            .font(font(in: geometry.size))
+                            .padding()
                 } else {
-                    shape
-                    Text(flashCard.backContent) // Inhalt Rückseite
-                        .minimumScaleFactor(DrawingConstants.minimumScaleFactor)
-                        .font(font(in: geometry.size))
-                        .padding()
+                        shape
+                        Text(flashCard.backContent) // Inhalt Rückseite
+                            .minimumScaleFactor(DrawingConstants.minimumScaleFactor)
+                            .font(font(in: geometry.size))
+                            .padding()
+                            .rotation3DEffect(Angle(degrees: flashCard.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
                 }
             }
+            .scaleEffect(flashCard.editMode ? 2 : 1)
+            .rotation3DEffect(Angle(degrees: flashCard.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
         }
+    }
+    
+    var animation: Animation {
+        Animation.easeInOut
     }
     
     private func font(in size: CGSize) -> Font { // Funktion für Schriftgröße

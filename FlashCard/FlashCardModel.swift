@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct FlashCardModel {
     var playlists: Array<Playlist> = [] // Playlists des Users
@@ -47,6 +48,7 @@ struct FlashCardModel {
         var frontContent: String = "front"
         var backContent: String = "back"
         var isFlipped: Bool = false // wenn false -> Vorderseite, wenn true -> Rückseite
+        var editMode: Bool = false
         
         init(_ id: Int) {
             self.id = id
@@ -56,12 +58,8 @@ struct FlashCardModel {
             isFlipped.toggle()
         }
         
-        mutating func editFlashCard(editContent: String) { // ändert den Inhalt der Lernkarte
-            if isFlipped == false {
-                frontContent = editContent
-            } else {
-                backContent = editContent
-            }
+        mutating func editFlashCard() { // ändert den Inhalt der Lernkarte
+            editMode.toggle()
         }
         
     }
