@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-enum Tab {
+enum Tab { // Cases für die Auswahl der Views innerhalb der TabView
     case playlists
     case newPlaylists
     case settings
 }
 
-struct MainView: View {
+struct MainView: View { // Hauptansicht (TabView)
     @StateObject var viewModel: FlashCardViewModel
-    @AppStorage("FirstStart") var welcomeMessageShown = true
-    @State var selection: Tab = .playlists
+    @AppStorage("FirstStart") var welcomeMessageShown = true // wenn true -> Willkommensnachricht wird angezeigt, wenn false -> wird nicht mehr angezeigt
+    @State var selection: Tab = .playlists // Variable zur Auswahl der View
     
     var body: some View {
         TabView(selection: $selection) {
@@ -45,7 +45,7 @@ struct MainView: View {
         }
     }
     
-    var welcomeView: some View {
+    var welcomeView: some View { // Willkommensnachricht
         VStack {
             Spacer()
             Text("Willkommen bei FlashCard!")
@@ -69,7 +69,7 @@ struct MainView: View {
     }
 }
 
-struct DrawingConstants {
+struct DrawingConstants { // Konstanten für ViewModifier etc.
     static let cornerRadius: CGFloat = 20
     static let fontScale: CGFloat = 0.3
     static let gridItemSize: CGFloat = 100

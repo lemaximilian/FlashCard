@@ -11,7 +11,7 @@ class FlashCardViewModel: ObservableObject {
     typealias Playlist = FlashCardModel.Playlist
     typealias FlashCard = FlashCardModel.FlashCard
     
-    @Published private var model = FlashCardModel()
+    @Published private var model = FlashCardModel() // Initialisierung Model
     var playlistID = 0
     var flashCardID = 0
     

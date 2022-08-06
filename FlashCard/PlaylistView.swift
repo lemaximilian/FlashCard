@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PlaylistView: View {
+struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist in einem Raster an
     @EnvironmentObject var viewModel: FlashCardViewModel
     var playlistName: String
     var playlistID: Int
@@ -26,9 +26,9 @@ struct PlaylistView: View {
 //                    }
 //                    .buttonStyle(.borderedProminent)
 //                    .controlSize(.regular)
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: DrawingConstants.gridItemSize))]) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: DrawingConstants.gridItemSize))]) { // Lernkarten-Raster
                         ZStack {
-                            let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+                            let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius) // Karte zum Erstellen
                                 .fill()
                                 .foregroundColor(.blue)
                             shape
@@ -46,7 +46,7 @@ struct PlaylistView: View {
                             viewModel.playlistID = playlistID
                             viewModel.addFlashCard()
                         }
-                        ForEach(viewModel.playlists[playlistID].flashCards, id: \.id) { flashCard in
+                        ForEach(viewModel.playlists[playlistID].flashCards, id: \.id) { flashCard in // Lernkarte innerhalb der Playlist
                             FlashCardView(flashCard: flashCard.self)
                                 .aspectRatio(1, contentMode: .fit)
                                 .onTapGesture {

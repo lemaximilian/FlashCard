@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddPlaylistView: View {
+struct AddPlaylistView: View { // View zum Hinzufügen von Playlisten
     @EnvironmentObject var viewModel: FlashCardViewModel
     @Binding var tab: Tab
     @State var userInput: String = ""
@@ -23,22 +23,22 @@ struct AddPlaylistView: View {
             Text("Neue Playlist erstellen")
                 .font(.title2)
                 .bold()
-            TextField("Name der Playlist", text: $userInput)
+            TextField("Name der Playlist", text: $userInput) // Textfeld für die Benutzereingabe
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             Text("Geben Sie Ihrer neuen Playlist einen Namen.")
                 .font(.footnote)
-            Button(action: {
+            Button(action: { // Button zur Erstellung
                 if userInput == "" {
-                    alertShown = true
+                    alertShown = true // wenn Textfeld leer -> Anzeige Alert
                 } else {
                     viewModel.addPlaylist(userInput)
-                    tab = .playlists
+                    tab = .playlists // wenn Textfeld nicht leer --> Playlist hinzufügen und zur ListView wechseln
                 }
             }) {
                 Text("Playlist erstellen")
             }
-            .alert(Text(alertTitle), isPresented: $alertShown, actions: {
+            .alert(Text(alertTitle), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
                 Button(alertButtonText) { }
             }, message: {
                 Text(alertMessage)
