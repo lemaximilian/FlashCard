@@ -19,9 +19,10 @@
 		8926FC13289D841200252875 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926FC12289D841200252875 /* FlashCardView.swift */; };
 		8926FC15289D84AF00252875 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926FC14289D84AF00252875 /* PlaylistView.swift */; };
 		898457A1289FF36F005309C5 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898457A0289FF36F005309C5 /* WelcomeView.swift */; };
-		898457A3289FF8CF005309C5 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898457A2289FF8CF005309C5 /* Tab.swift */; };
+		898457A3289FF8CF005309C5 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898457A2289FF8CF005309C5 /* Enum.swift */; };
 		898457A7289FF997005309C5 /* DrawingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898457A6289FF997005309C5 /* DrawingConstants.swift */; };
 		898457A9289FFADA005309C5 /* AddFlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898457A8289FFADA005309C5 /* AddFlashCardView.swift */; };
+		89D8B85028A02926006F799C /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8B84F28A02926006F799C /* PageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,9 +39,10 @@
 		8926FC12289D841200252875 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
 		8926FC14289D84AF00252875 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		898457A0289FF36F005309C5 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		898457A2289FF8CF005309C5 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		898457A2289FF8CF005309C5 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		898457A6289FF997005309C5 /* DrawingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingConstants.swift; sourceTree = "<group>"; };
 		898457A8289FFADA005309C5 /* AddFlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlashCardView.swift; sourceTree = "<group>"; };
+		89D8B84F28A02926006F799C /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +83,11 @@
 				8926FC10289D83FC00252875 /* AddPlaylistView.swift */,
 				8926FC0A289D81A300252875 /* ListView.swift */,
 				8926FC14289D84AF00252875 /* PlaylistView.swift */,
+				89D8B84F28A02926006F799C /* PageView.swift */,
 				898457A8289FFADA005309C5 /* AddFlashCardView.swift */,
 				8926FC12289D841200252875 /* FlashCardView.swift */,
 				8926FC0E289D83A400252875 /* SettingsView.swift */,
-				898457A2289FF8CF005309C5 /* Tab.swift */,
+				898457A2289FF8CF005309C5 /* Enum.swift */,
 				898457A6289FF997005309C5 /* DrawingConstants.swift */,
 				8926FBFC289D7E5300252875 /* Assets.xcassets */,
 				8926FBFE289D7E5300252875 /* Preview Content */,
@@ -175,7 +178,7 @@
 				8926FC07289D7F2700252875 /* FlashCardModel.swift in Sources */,
 				8926FC15289D84AF00252875 /* PlaylistView.swift in Sources */,
 				8926FBFB289D7E5300252875 /* MainView.swift in Sources */,
-				898457A3289FF8CF005309C5 /* Tab.swift in Sources */,
+				898457A3289FF8CF005309C5 /* Enum.swift in Sources */,
 				898457A1289FF36F005309C5 /* WelcomeView.swift in Sources */,
 				8926FBF9289D7E5300252875 /* FlashCardApp.swift in Sources */,
 				8926FC09289D7FAD00252875 /* FlashCardViewModel.swift in Sources */,
@@ -183,6 +186,7 @@
 				898457A7289FF997005309C5 /* DrawingConstants.swift in Sources */,
 				8926FC0B289D81A300252875 /* ListView.swift in Sources */,
 				898457A9289FFADA005309C5 /* AddFlashCardView.swift in Sources */,
+				89D8B85028A02926006F799C /* PageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

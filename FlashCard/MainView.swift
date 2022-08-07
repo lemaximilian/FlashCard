@@ -13,12 +13,15 @@ struct MainView: View { // Hauptansicht (TabView)
     
     var body: some View {
         TabView(selection: $selection) {
-            ListView()
-                .tabItem {
-                    Image(systemName: "square.stack")
-                    Text("Playlists")
-                }
-                .tag(Tab.playlists)
+            NavigationView {
+                ListView()
+            }
+            .navigationViewStyle(.stack)
+            .tabItem {
+                Image(systemName: "square.stack")
+                Text("Playlists")
+            }
+            .tag(Tab.playlists)
             AddPlaylistView(tab: $selection)
                 .tabItem {
                     Image(systemName: "plus.circle")

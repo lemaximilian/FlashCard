@@ -1,5 +1,5 @@
 //
-//  Tab.swift
+//  Enum.swift
 //  FlashCard
 //
 //  Created by Maximilian Le on 07.08.22.
