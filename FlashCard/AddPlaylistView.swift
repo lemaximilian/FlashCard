@@ -11,8 +11,6 @@ struct AddPlaylistView: View { // View zum Hinzufügen von Playlisten
     @EnvironmentObject var viewModel: FlashCardViewModel
     @Binding var tab: Tab
     @State var userInput: String = ""
-    @State var alertShown: Bool = false
-    @State var nextView: Bool = false
     var alertTitle: String = "Ungültiger Name"
     var alertMessage: String = "Bitte geben Sie für Ihre Playlist einen Namen ein."
     var alertButtonText: String = "Bestätigen"
@@ -30,7 +28,7 @@ struct AddPlaylistView: View { // View zum Hinzufügen von Playlisten
                 .font(.footnote)
             Button(action: { // Button zur Erstellung
                 if userInput == "" {
-                    alertShown = true // wenn Textfeld leer -> Anzeige Alert
+                    viewModel.alertShown.toggle() // wenn Textfeld leer -> Anzeige Alert
                 } else {
                     viewModel.addPlaylist(userInput)
                     tab = .playlists // wenn Textfeld nicht leer --> Playlist hinzufügen und zur ListView wechseln
@@ -38,7 +36,7 @@ struct AddPlaylistView: View { // View zum Hinzufügen von Playlisten
             }) {
                 Text("Playlist erstellen")
             }
-            .alert(Text(alertTitle), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
+            .alert(Text(alertTitle), isPresented: $viewModel.alertShown, actions: { // Alert bei fehlendem Playlistnamen
                 Button(alertButtonText) { }
             }, message: {
                 Text(alertMessage)

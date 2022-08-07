@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct FlashCardModel {
+    @AppStorage("FirstStart") var welcomeMessageShown = true // wenn true -> Willkommensnachricht wird angezeigt, wenn false -> wird nicht mehr angezeigt
+    var alertShown = false
     var playlists: Array<Playlist> = [] // Playlists des Users
     
     mutating func addPlaylist(_ name: String) { // fügt eine Playlist zum Array playlists hinzu

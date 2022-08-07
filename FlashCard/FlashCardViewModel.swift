@@ -15,6 +15,16 @@ class FlashCardViewModel: ObservableObject {
     var playlistID = 0
     var flashCardID = 0
     
+    var welcomeMessageShown: Bool {
+        get { model.welcomeMessageShown }
+        set { model.welcomeMessageShown = newValue }
+    }
+    
+    var alertShown: Bool {
+        get { model.alertShown }
+        set { model.alertShown = newValue }
+    }
+    
     var playlists: Array<Playlist> {
         get { model.playlists }
         set { model.playlists = newValue }
