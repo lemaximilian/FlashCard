@@ -45,6 +45,6 @@ struct MainView: View { // Hauptansicht (TabView)
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: FlashCardViewModel()).preferredColorScheme(.light)
+        MainView(viewModel: FlashCardViewModel()).preferredColorScheme(.dark)
     }
 }

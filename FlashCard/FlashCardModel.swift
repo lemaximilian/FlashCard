@@ -47,8 +47,8 @@ struct FlashCardModel {
         
     struct FlashCard: Identifiable {
         let id: Int
-        var frontContent: String = "front"
-        var backContent: String = "back"
+        var frontContent: String = "vorne"
+        var backContent: String = "hinten"
         var isFlipped: Bool = false // wenn false -> Vorderseite, wenn true -> Rückseite
         var editMode: Bool = false
         

@@ -17,12 +17,10 @@ struct AddFlashCardView: View { // Erste Karte im Raster, zum Hinzufügen neuer 
                 .fill()
                 .foregroundColor(.blue)
             shape
-            VStack {
-                Image(systemName: "plus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(50)
-            }
+            Image(systemName: "plus")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding(50)
         }
         .aspectRatio(1, contentMode: .fit)
         .onTapGesture {
