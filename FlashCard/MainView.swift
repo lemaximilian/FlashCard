@@ -37,7 +37,7 @@ struct MainView: View { // Hauptansicht (TabView)
         }
         .environmentObject(viewModel)
         .sheet(isPresented: $viewModel.welcomeMessageShown) {
-            WelcomeView().padding()
+            WelcomeView().padding().environmentObject(viewModel)
         }
     }
     
@@ -45,6 +45,6 @@ struct MainView: View { // Hauptansicht (TabView)
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: FlashCardViewModel()).preferredColorScheme(.dark)
+        MainView(viewModel: FlashCardViewModel()).preferredColorScheme(.light)
     }
 }
