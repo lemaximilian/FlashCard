@@ -13,24 +13,42 @@ struct PageView: View {
     var playlistID: Int
     
     var body: some View {
-        TabView(selection: $selectedFlashCard) {
-            ForEach(viewModel.playlists[playlistID].flashCards.reversed(), id: \.id) { flashCard in // Lernkarte innerhalb der Playlist
-                FlashCardView(flashCard: flashCard.self)
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding()
-                    .onTapGesture {
-                        viewModel.playlistID = playlistID
-                        viewModel.flashCardID = flashCard.id
-                        withAnimation {
-//                            viewModel.editFlashCard()
-                            viewModel.flipFlashCard()
-                        }
-                    }
-                    .tag(flashCard.id)
+        VStack {
+            HStack(alignment: .bottom) {
+                Button(action: {
+                    
+                }) {
+                    Image(systemName: "pencil")
+                }
+                Spacer()
+                .foregroundColor(.blue)
+                Button(action: {
+                    
+                }) {
+                    Image(systemName: "trash")
+                }
+                .foregroundColor(.red)
             }
+            .padding(.horizontal)
+            TabView(selection: $selectedFlashCard) {
+                ForEach(viewModel.playlists[playlistID].flashCards.reversed(), id: \.id) { flashCard in // Lernkarte innerhalb der Playlist
+                    FlashCardView(flashCard: flashCard.self)
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding()
+                        .onTapGesture {
+                            viewModel.playlistID = playlistID
+                            viewModel.flashCardID = flashCard.id
+                            withAnimation {
+    //                            viewModel.editFlashCard()
+                                viewModel.flipFlashCard()
+                            }
+                        }
+                        .tag(flashCard.id)
+                }
+            }
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
         }
-        .tabViewStyle(.page)
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 
