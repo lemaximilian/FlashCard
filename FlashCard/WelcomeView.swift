@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View { // Willkommensnachricht
     @EnvironmentObject var viewModel: FlashCardViewModel
+    @Binding var welcomeMessageShown: Bool
     let welcomeTitle = "Willkommen bei FlashCard!"
     let welcomeText = "Erstellen Sie mit FlashCard grandiose Lernkarten um ihr Lernerlebnis zu verbessern! Legen Sie einfach eine neue Playlist an und fügen Sie Lernkarten hinzu."
     let buttonLabel = "Verstanden!"
@@ -24,7 +25,7 @@ struct WelcomeView: View { // Willkommensnachricht
                 .font(.subheadline)
             Spacer()
             Button(action: {
-                viewModel.welcomeMessageShown.toggle()
+                welcomeMessageShown = false
             }) {
                 Text(buttonLabel)
                     .padding(10)

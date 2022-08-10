@@ -15,10 +15,10 @@ class FlashCardViewModel: ObservableObject {
     var playlistIndex = 0
     var flashCardIndex = 0
     
-    var welcomeMessageShown: Bool {
-        get { model.welcomeMessageShown }
-        set { model.welcomeMessageShown = newValue }
-    }
+//    var welcomeMessageShown: Bool {
+//        get { model.welcomeMessageShown }
+//        set { model.welcomeMessageShown = newValue }
+//    }
     
     var alertShown: Bool {
         get { model.alertShown }

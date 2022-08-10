@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View { // Hauptansicht (TabView)
+    @AppStorage("FirstStart") var welcomeMessageShown = true // wenn true -> Willkommensnachricht wird angezeigt, wenn false -> wird nicht mehr angezeigt
     @StateObject var viewModel: FlashCardViewModel
     @State var selection: Tab = .playlists // Variable zur Auswahl der View
     
@@ -36,8 +37,8 @@ struct MainView: View { // Hauptansicht (TabView)
                 .tag(Tab.settings)
         }
         .environmentObject(viewModel)
-        .sheet(isPresented: $viewModel.welcomeMessageShown) {
-            WelcomeView().padding().environmentObject(viewModel)
+        .sheet(isPresented: $welcomeMessageShown) {
+            WelcomeView(welcomeMessageShown: $welcomeMessageShown).padding().environmentObject(viewModel)
         }
     }
     
