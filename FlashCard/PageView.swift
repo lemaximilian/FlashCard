@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PageView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
-    @State var selectedFlashCard: Int
+    @State var selectedFlashCard: UUID
     var playlistIndex: Int
     
     var body: some View {
@@ -23,7 +23,7 @@ struct PageView: View {
                 Spacer()
                 .foregroundColor(.blue)
                 Button(action: {
-                    viewModel.flashCardIndex = selectedFlashCard
+                    viewModel.flashCardIndex = viewModel.getFlashCardIndex(selectedFlashCard)!
                     viewModel.deleteFlashCard()
                 }) {
                     Image(systemName: "trash")

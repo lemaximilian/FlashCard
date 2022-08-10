@@ -18,7 +18,7 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: DrawingConstants.gridItemSize))]) { // Lernkarten-Raster
                     AddFlashCardView(playlistIndex: playlistIndex)
                     ForEach(viewModel.playlists[playlistIndex].flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
-                        NavigationLink(destination: PageView(selectedFlashCard: viewModel.getFlashCardIndex(flashCard.id)!, playlistIndex: playlistIndex)) {
+                        NavigationLink(destination: PageView(selectedFlashCard: flashCard.id, playlistIndex: playlistIndex)) {
                             FlashCardView(flashCard: flashCard.self)
                                 .aspectRatio(1, contentMode: .fit)
                                 .transition(.move(edge: .leading))
