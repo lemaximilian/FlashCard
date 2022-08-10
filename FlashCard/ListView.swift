@@ -15,8 +15,8 @@ struct ListView: View { // View, die die erstellten Playlisten anzeigt
                 Text("Es ist keine Playlist vorhanden.")
             } else { // wenn mind. eine Playlist vorhanden -> Anzeige als Liste
                 List {
-                    ForEach(viewModel.playlists, id: \.id) { playlist in
-                        NavigationLink(destination: PlaylistView(playlistName: playlist.name, playlistID: playlist.id)) {
+                    ForEach(viewModel.playlists) { playlist in
+                        NavigationLink(destination: PlaylistView(playlistName: playlist.name, playlistIndex: viewModel.getPlaylistIndex(playlist.id)!)) {
                             Text(playlist.name)
                         }
 //                        .simultaneousGesture(TapGesture().onEnded {

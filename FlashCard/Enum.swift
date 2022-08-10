@@ -12,3 +12,4 @@ enum Tab { // Cases für die Auswahl der Views innerhalb der TabView
     case newPlaylists
     case settings
 }
+

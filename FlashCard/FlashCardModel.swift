@@ -14,30 +14,35 @@ struct FlashCardModel {
     var playlists: Array<Playlist> = [] // Playlists des Users
     
     mutating func addPlaylist(_ name: String) { // fügt eine Playlist zum Array playlists hinzu
-        let newPlaylistID = playlists.count
-        let newPlaylist = Playlist(id: newPlaylistID, name: name)
+        let newPlaylist = Playlist(name: name)
         playlists.append(newPlaylist)
     }
     
-    mutating func deletePlaylist(_ playlist: Playlist) { // löscht die Playlist
-        playlists.removeAll { $0.id == playlist.id }
+    mutating func deletePlaylist(_ playlistIndex: Int) { // löscht die Playlist
+        playlists.remove(at: playlistIndex)
+    }
+    
+    func getPlaylistIndex(_ id: UUID) -> Int? {
+        playlists.firstIndex { $0.id == id }
     }
     
     struct Playlist: Identifiable {
-        let id: Int
+        let id = UUID()
         var name: String // Name der Playlist
         var flashCards: Array<FlashCard> = [] // Lernkarten innerhalb einer Playlist
         
         mutating func addFlashCard() { // fügt eine Lernkarte zum Array flashCards hinzu
-            let newFlashCardID = flashCards.count
-            let newFlashCard = FlashCard(newFlashCardID)
+            let newFlashCard = FlashCard()
             flashCards.append(newFlashCard)
         }
         
-        mutating func deleteFlashCard(_ flashCard: FlashCard) { // löscht die Lernkarte
-            flashCards.removeAll { $0.id == flashCard.id}
+        mutating func deleteFlashCard(_ flashCardIndex: Int) { // löscht die Lernkarte
+            flashCards.remove(at: flashCardIndex)
         }
         
+        func getFlashCardIndex(_ id: UUID) -> Int? {
+            flashCards.firstIndex { $0.id == id }
+        }
         
         mutating func editPlaylistName(newName: String) {
             
@@ -46,15 +51,11 @@ struct FlashCardModel {
     }
         
     struct FlashCard: Identifiable {
-        let id: Int
+        let id = UUID()
         var frontContent: String = "vorne"
         var backContent: String = "hinten"
         var isFlipped: Bool = false // wenn false -> Vorderseite, wenn true -> Rückseite
         var editMode: Bool = false
-        
-        init(_ id: Int) {
-            self.id = id
-        }
         
         mutating func flipFlashCard() { // dreht die Lernkarte um
             isFlipped.toggle()

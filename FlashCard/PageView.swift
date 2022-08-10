@@ -9,8 +9,8 @@ import SwiftUI
 
 struct PageView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
-    @State var selectedFlashCard: Int 
-    var playlistID: Int
+    @State var selectedFlashCard: Int
+    var playlistIndex: Int
     
     var body: some View {
         VStack {
@@ -23,7 +23,8 @@ struct PageView: View {
                 Spacer()
                 .foregroundColor(.blue)
                 Button(action: {
-                    
+                    viewModel.flashCardIndex = selectedFlashCard
+                    viewModel.deleteFlashCard()
                 }) {
                     Image(systemName: "trash")
                 }
@@ -31,13 +32,13 @@ struct PageView: View {
             }
             .padding(.horizontal)
             TabView(selection: $selectedFlashCard) {
-                ForEach(viewModel.playlists[playlistID].flashCards.reversed(), id: \.id) { flashCard in // Lernkarte innerhalb der Playlist
+                ForEach(viewModel.playlists[playlistIndex].flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
                     FlashCardView(flashCard: flashCard.self)
                         .aspectRatio(1, contentMode: .fit)
                         .padding()
                         .onTapGesture {
-                            viewModel.playlistID = playlistID
-                            viewModel.flashCardID = flashCard.id
+                            viewModel.playlistIndex = playlistIndex
+                            viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
                             withAnimation {
     //                            viewModel.editFlashCard()
                                 viewModel.flipFlashCard()

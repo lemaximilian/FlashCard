@@ -12,8 +12,8 @@ class FlashCardViewModel: ObservableObject {
     typealias FlashCard = FlashCardModel.FlashCard
     
     @Published private var model = FlashCardModel() // Initialisierung Model
-    var playlistID = 0
-    var flashCardID = 0
+    var playlistIndex = 0
+    var flashCardIndex = 0
     
     var welcomeMessageShown: Bool {
         get { model.welcomeMessageShown }
@@ -31,24 +31,40 @@ class FlashCardViewModel: ObservableObject {
     }
     
     var flashCards: Array<FlashCard> {
-        get { model.playlists[playlistID].flashCards }
-        set { model.playlists[playlistID].flashCards = newValue }
+        get { model.playlists[playlistIndex].flashCards }
+        set { model.playlists[playlistIndex].flashCards = newValue }
     }
     
     func addPlaylist(_ name: String) {
         model.addPlaylist(name)
     }
     
+    func deletePlaylist() {
+        model.deletePlaylist(playlistIndex)
+    }
+    
+    func getPlaylistIndex(_ id: UUID) -> Int? {
+        model.getPlaylistIndex(id)
+    }
+    
     func addFlashCard() {
-        playlists[playlistID].addFlashCard()
+        playlists[playlistIndex].addFlashCard()
     }
     
     func flipFlashCard() {
-        flashCards[flashCardID].flipFlashCard()
+        flashCards[flashCardIndex].flipFlashCard()
     }
     
     func editFlashCard() {
-        flashCards[flashCardID].editFlashCard()
+        flashCards[flashCardIndex].editFlashCard()
+    }
+    
+    func deleteFlashCard() {
+        playlists[playlistIndex].deleteFlashCard(flashCardIndex)
+    }
+    
+    func getFlashCardIndex(_ id: UUID) -> Int? {
+        playlists[playlistIndex].getFlashCardIndex(id)
     }
 }
 

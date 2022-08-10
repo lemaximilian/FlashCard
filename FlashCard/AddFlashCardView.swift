@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddFlashCardView: View { // Erste Karte im Raster, zum Hinzufügen neuer Lernkarten
     @EnvironmentObject var viewModel: FlashCardViewModel
-    var playlistID: Int
+    var playlistIndex: Int
     
     var body: some View {
         ZStack {
@@ -24,7 +24,7 @@ struct AddFlashCardView: View { // Erste Karte im Raster, zum Hinzufügen neuer 
         }
         .aspectRatio(1, contentMode: .fit)
         .onTapGesture {
-            viewModel.playlistID = playlistID
+            viewModel.playlistIndex = playlistIndex
             withAnimation {
                 viewModel.addFlashCard()
             }
