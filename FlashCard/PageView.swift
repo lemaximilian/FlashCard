@@ -27,14 +27,14 @@ struct PageView: View {
                     FlashCardView(flashCard: flashCard.self)
                         .aspectRatio(1, contentMode: .fit)
                         .padding()
-                        .onTapGesture {
-                            viewModel.playlistIndex = playlistIndex
-                            viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
-                            withAnimation {
-    //                            viewModel.editFlashCard()
-                                viewModel.flipFlashCard()
-                            }
-                        }
+//                        .onTapGesture {
+//                            viewModel.playlistIndex = playlistIndex
+//                            viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
+//                            withAnimation {
+//                                viewModel.editFlashCard()
+//                                viewModel.flipFlashCard()
+//                            }
+//                        }
                         .tag(flashCard.id)
                     Button(action: {
                         viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
@@ -60,6 +60,7 @@ struct PageView: View {
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .onTapGesture { hideKeyboardAndSave() }
         .toolbar {
             HStack {
                 Button(action: {
@@ -85,6 +86,14 @@ struct PageView: View {
                 .foregroundColor(.red)
             }
         }
+    }
+    
+    func hideKeyboardAndSave() {
+            save()
+    }
+        
+    func save() {
+        viewModel.flashCards[viewModel.flashCardIndex].frontContent = text
     }
 }
 
