@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AVFoundation
+import NaturalLanguage
 
 struct PageView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
@@ -16,22 +18,44 @@ struct PageView: View {
     let alertMessage = "Möchten Sie diese FlashCard wirklich löschen?"
     let alertButtonTextConfirm = "Bestätigen"
     let alertButtonTextCancel = "Abbrechen"
+    @State var text: String = ""
     
     var body: some View {
         TabView(selection: $selectedFlashCard) {
             ForEach(viewModel.playlists[playlistIndex].flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
-                FlashCardView(flashCard: flashCard.self)
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding()
-                    .onTapGesture {
-                        viewModel.playlistIndex = playlistIndex
-                        viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
-                        withAnimation {
-//                            viewModel.editFlashCard()
-                            viewModel.flipFlashCard()
+                VStack {
+                    FlashCardView(flashCard: flashCard.self)
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding()
+                        .onTapGesture {
+                            viewModel.playlistIndex = playlistIndex
+                            viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
+                            withAnimation {
+    //                            viewModel.editFlashCard()
+                                viewModel.flipFlashCard()
+                            }
                         }
+                        .tag(flashCard.id)
+                    Button(action: {
+                        viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
+                        if viewModel.flashCards[viewModel.flashCardIndex].isFlipped == false {
+                            text = viewModel.flashCards[viewModel.flashCardIndex].frontContent
+                        } else {
+                            text = viewModel.flashCards[viewModel.flashCardIndex].backContent
+                        }
+                        if let language = NSLinguisticTagger.dominantLanguage(for: text) {
+                            let ausgabe = AVSpeechUtterance(string: "\(text)")
+                            ausgabe.voice = AVSpeechSynthesisVoice(language: language)
+                            ausgabe.rate = 0.5 //Tempo der Aussprache
+                            
+                                let synthesizer = AVSpeechSynthesizer()
+                            synthesizer.speak(ausgabe)
+                        }
+                    }) {
+                        Image(systemName: "speaker.wave.2")
+                            .foregroundColor(.blue)
                     }
-                    .tag(flashCard.id)
+                }
             }
         }
         .tabViewStyle(.page)
