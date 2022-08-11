@@ -13,7 +13,6 @@ struct PageView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
     @State var selectedFlashCard: UUID
     @State var alertShown = false
-    var playlistIndex: Int
     let alertTitle = "Achtung"
     let alertMessage = "Möchten Sie diese FlashCard wirklich löschen?"
     let alertButtonTextConfirm = "Bestätigen"
@@ -22,8 +21,18 @@ struct PageView: View {
     
     var body: some View {
         TabView(selection: $selectedFlashCard) {
-            ForEach(viewModel.playlists[playlistIndex].flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
+            ForEach(viewModel.playlists[viewModel.playlistIndex].flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
                 VStack {
+                    Button(action: {
+                        viewModel.flashCardIndex = viewModel.getFlashCardIndex(selectedFlashCard)!
+                        withAnimation {
+//                                viewModel.editFlashCard()
+                            viewModel.flipFlashCard()
+                        }
+                    }) {
+                        Image(systemName: "arrow.left.arrow.right")
+                            .foregroundColor(.blue)
+                    }
                     FlashCardView(flashCard: flashCard.self)
                         .aspectRatio(1, contentMode: .fit)
                         .padding()
@@ -60,7 +69,7 @@ struct PageView: View {
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
-        .onTapGesture { hideKeyboardAndSave() }
+//        .onTapGesture { hideKeyboardAndSave() }
         .toolbar {
             HStack {
                 Button(action: {
@@ -88,12 +97,12 @@ struct PageView: View {
         }
     }
     
-    func hideKeyboardAndSave() {
-            save()
-    }
-        
-    func save() {
-        viewModel.flashCards[viewModel.flashCardIndex].frontContent = text
-    }
+//    func hideKeyboardAndSave() {
+//            save()
+//    }
+//
+//    func save() {
+//        viewModel.flashCards[viewModel.flashCardIndex].frontContent = text
+//    }
 }
 

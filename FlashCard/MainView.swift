@@ -38,7 +38,9 @@ struct MainView: View { // Hauptansicht (TabView)
         }
         .environmentObject(viewModel)
         .sheet(isPresented: $welcomeMessageShown) {
-            WelcomeView(welcomeMessageShown: $welcomeMessageShown).padding().environmentObject(viewModel)
+            WelcomeView(welcomeMessageShown: $welcomeMessageShown)
+                .environmentObject(viewModel)
+                .padding()
         }
     }
     
