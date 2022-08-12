@@ -15,11 +15,6 @@ class FlashCardViewModel: ObservableObject {
     var playlistIndex = 0
     var flashCardIndex = 0
     
-//    var welcomeMessageShown: Bool {
-//        get { model.welcomeMessageShown }
-//        set { model.welcomeMessageShown = newValue }
-//    }
-    
     var alertShown: Bool {
         get { model.alertShown }
         set { model.alertShown = newValue }
@@ -39,8 +34,8 @@ class FlashCardViewModel: ObservableObject {
         model.addPlaylist(name)
     }
     
-    func deletePlaylist() {
-        model.deletePlaylist(playlistIndex)
+    func deletePlaylist(_ id: UUID) {
+        model.deletePlaylist(id)
     }
     
     func getPlaylistIndex(_ id: UUID) -> Int? {
@@ -59,8 +54,8 @@ class FlashCardViewModel: ObservableObject {
         flashCards[flashCardIndex].editFlashCard()
     }
     
-    func deleteFlashCard() {
-        playlists[playlistIndex].deleteFlashCard(flashCardIndex)
+    func deleteFlashCard(_ id: UUID) {
+        playlists[playlistIndex].deleteFlashCard(id)
     }
     
     func getFlashCardIndex(_ id: UUID) -> Int? {

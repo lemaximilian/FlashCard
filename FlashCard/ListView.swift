@@ -11,21 +11,26 @@ struct ListView: View { // View, die die erstellten Playlisten anzeigt
     @EnvironmentObject var viewModel: FlashCardViewModel
     
     var body: some View {
-            if viewModel.playlists.count == 0 { // wenn keine Playlist vorhanden --> Text
-                Text("Es ist keine Playlist vorhanden.")
-            } else { // wenn mind. eine Playlist vorhanden -> Anzeige als Liste
-                List {
-                    ForEach(viewModel.playlists) { playlist in
-                        NavigationLink(destination: PlaylistView(playlistName: playlist.name, playlistIndex: viewModel.getPlaylistIndex(playlist.id)!)) {
-                            Text(playlist.name)
-                        }
+        listView
+    }
+    
+    @ViewBuilder
+    var listView: some View {
+        if viewModel.playlists.count == 0 { // wenn keine Playlist vorhanden --> Text
+            Text("Es ist keine Playlist vorhanden.")
+        } else { // wenn mind. eine Playlist vorhanden -> Anzeige als Liste
+            List {
+                ForEach(viewModel.playlists) { playlist in
+                    NavigationLink(destination: PlaylistView(playlistID: playlist.id, playlistName: playlist.name)) {
+                        Text(playlist.name)
+                    }
 //                        .simultaneousGesture(TapGesture().onEnded {
 //                            viewModel.playlistID = playlist.id
 //                        })
-                    }
                 }
-                .navigationTitle("Playlists")
             }
+            .navigationTitle("Playlists")
+        }
     }
 }
 

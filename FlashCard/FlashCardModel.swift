@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct FlashCardModel {
     var alertShown = false
@@ -17,8 +16,8 @@ struct FlashCardModel {
         playlists.append(newPlaylist)
     }
     
-    mutating func deletePlaylist(_ playlistIndex: Int) { // löscht die Playlist
-        playlists.remove(at: playlistIndex)
+    mutating func deletePlaylist(_ id: UUID) { // löscht die Playlist
+        playlists.removeAll { $0.id == id}
     }
     
     func getPlaylistIndex(_ id: UUID) -> Int? {
@@ -35,8 +34,8 @@ struct FlashCardModel {
             flashCards.append(newFlashCard)
         }
         
-        mutating func deleteFlashCard(_ flashCardIndex: Int) { // löscht die Lernkarte
-            flashCards.remove(at: flashCardIndex)
+        mutating func deleteFlashCard(_ id: UUID) { // löscht die Lernkarte
+            flashCards.removeAll { $0.id == id }
         }
         
         func getFlashCardIndex(_ id: UUID) -> Int? {
