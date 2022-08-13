@@ -17,11 +17,12 @@ struct FlashCardModel {
     }
     
     mutating func deletePlaylist(_ id: UUID) { // löscht die Playlist
-        playlists.removeAll { $0.id == id}
-    }
-    
-    func getPlaylistIndex(_ id: UUID) -> Int? {
-        playlists.firstIndex { $0.id == id }
+        if let index = playlists.firstIndex(where: { $0.id == id }) {
+            print(index)
+            playlists.remove(at: index)
+        } else {
+            print(index)
+        }
     }
     
     struct Playlist: Identifiable {
@@ -34,12 +35,13 @@ struct FlashCardModel {
             flashCards.append(newFlashCard)
         }
         
-        mutating func deleteFlashCard(_ id: UUID) { // löscht die Lernkarte
-            flashCards.removeAll { $0.id == id }
-        }
-        
-        func getFlashCardIndex(_ id: UUID) -> Int? {
-            flashCards.firstIndex { $0.id == id }
+        mutating func deleteFlashCard(_ id: UUID) { // löscht die Playlist
+            if let index = flashCards.firstIndex(where: { $0.id == id }) {
+                print(index)
+                flashCards.remove(at: index)
+            } else {
+                print(index)
+            }
         }
         
         mutating func editPlaylistName(newName: String) {

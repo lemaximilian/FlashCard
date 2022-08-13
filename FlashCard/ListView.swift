@@ -21,12 +21,9 @@ struct ListView: View { // View, die die erstellten Playlisten anzeigt
         } else { // wenn mind. eine Playlist vorhanden -> Anzeige als Liste
             List {
                 ForEach(viewModel.playlists) { playlist in
-                    NavigationLink(destination: PlaylistView(playlistID: playlist.id, playlistName: playlist.name)) {
+                    NavigationLink(destination: PlaylistView(playlist: playlist)) {
                         Text(playlist.name)
                     }
-//                        .simultaneousGesture(TapGesture().onEnded {
-//                            viewModel.playlistID = playlist.id
-//                        })
                 }
             }
             .navigationTitle("Playlists")

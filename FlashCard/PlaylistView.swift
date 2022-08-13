@@ -9,9 +9,8 @@ import SwiftUI
 
 struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist in einem Raster an
     @EnvironmentObject var viewModel: FlashCardViewModel
-    var playlistID: UUID
     @State var alertShown = false
-    var playlistName: String
+    var playlist: FlashCardModel.Playlist
     let alertTitle = "Achtung"
     let alertMessage = "Möchten Sie diese Playlist wirklich löschen?"
     let alertButtonTextConfirm = "Bestätigen"
@@ -20,10 +19,10 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: DrawingConstants.gridItemSize))]) { // Lernkarten-Raster
-                AddFlashCardView(playlistIndex: viewModel.getPlaylistIndex(playlistID)!)
-                ForEach(viewModel.flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
-                    NavigationLink(destination: PageView(selectedFlashCard: flashCard.id, playlistIndex: viewModel.getPlaylistIndex(playlistID)!)) {
-                        FlashCardView(flashCard: flashCard.self)
+                AddFlashCardView(playlist: playlist)
+                ForEach(playlist.flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
+                    NavigationLink(destination: PageView(selection: flashCard.id, flashCard: flashCard, playlist: playlist)) {
+                        FlashCardView(flashCard: flashCard)
                             .aspectRatio(1, contentMode: .fit)
                             .transition(.move(edge: .leading))
                     }
@@ -40,11 +39,8 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
                 }
             }
         }
-        .navigationTitle(playlistName)
+        .navigationTitle(playlist.name)
         .padding()
-//            .onAppear {
-//                viewModel.playlistIndex = playlistIndex
-//            }
         .toolbar {
             Button(action: {
                 alertShown.toggle()
@@ -54,8 +50,7 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
             .alert(Text(alertTitle), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
                 Button(alertButtonTextCancel) { }
                 Button(alertButtonTextConfirm) {
-                    print(viewModel.getPlaylistIndex(playlistID))
-                    viewModel.deletePlaylist(playlistID)
+                    viewModel.deletePlaylist(playlist.id)
                 }
             }, message: {
                 Text(alertMessage)
