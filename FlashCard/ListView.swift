@@ -24,8 +24,17 @@ struct ListView: View { // View, die die erstellten Playlisten anzeigt
                         }
                     }
                 }
+                .onDelete(perform: { indexSet in
+                    viewModel.playlists.remove(atOffsets: indexSet)
+                })
+                .onMove(perform: { indices, newOffset in
+                    viewModel.playlists.move(fromOffsets: indices, toOffset: newOffset)
+                })
             }
             .navigationTitle("Playlists")
+            .toolbar {
+                EditButton()
+            }
         }
     }
 }
