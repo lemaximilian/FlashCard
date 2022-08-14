@@ -59,9 +59,13 @@ struct FlashCardModel {
             isFlipped.toggle()
         }
         
-//        mutating func editFlashCard() { // ändert den Inhalt der Lernkarte
-//            editMode.toggle()
-//        }
+        mutating func editFlashCard(_ newContent: String) { // ändert den Inhalt der Lernkarte
+            if isFlipped == false {
+                frontContent = newContent
+            } else {
+                backContent = newContent
+            }
+        }
         
     }
     

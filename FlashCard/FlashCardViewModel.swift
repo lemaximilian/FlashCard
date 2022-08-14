@@ -68,9 +68,13 @@ class FlashCardViewModel: ObservableObject {
         }
     }
     
-//    func editFlashCard() {
-//        flashCards[flashCardIndex].editFlashCard()
-//    }
+    func editFlashCard(playlistID : UUID, flashCardID : UUID, newContent: String) {
+        if let playlistIndex = playlists.firstIndex(where: { $0.id == playlistID }) {
+            if let flashCardIndex = playlists[playlistIndex].flashCards.firstIndex(where: { $0.id == flashCardID} ) {
+                playlists[playlistIndex].flashCards[flashCardIndex].editFlashCard(newContent)
+            }
+        }
+    }
 
 }
 

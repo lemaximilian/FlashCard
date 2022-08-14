@@ -32,7 +32,7 @@ struct PageView: View {
                 .tag(flashCard.id)
                 .toolbar {
                     HStack {
-                        NavigationLink(destination: EditView(flashCard: flashCard)) {
+                        NavigationLink(destination: EditView(flashCard: flashCard, playlist: playlist)) {
                             Image(systemName: "pencil")
                         }
                         DeleteButton(flashCardID: selection, playlist: playlist)
