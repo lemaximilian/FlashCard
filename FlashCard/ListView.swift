@@ -11,12 +11,7 @@ struct ListView: View { // View, die die erstellten Playlisten anzeigt
     @EnvironmentObject var viewModel: FlashCardViewModel
     
     var body: some View {
-        listView
-    }
-    
-    @ViewBuilder
-    var listView: some View {
-        if viewModel.playlists.count == 0 { // wenn keine Playlist vorhanden --> Text
+        if viewModel.playlists.isEmpty { // wenn keine Playlist vorhanden --> Text
             Text("Es ist keine Playlist vorhanden.")
         } else { // wenn mind. eine Playlist vorhanden -> Anzeige als Liste
             List {

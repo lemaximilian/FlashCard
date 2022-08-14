@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct FlashCardApp: App {
-    private let flashCard = FlashCardViewModel()
+    @StateObject private var flashCard = FlashCardViewModel()
     
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: flashCard)
+            MainView()
+                .environmentObject(flashCard)
         }
     }
 }

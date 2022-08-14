@@ -50,14 +50,12 @@ class FlashCardViewModel: ObservableObject {
     }
     
     func addFlashCard(_ id: UUID) {
-        if let index = playlists.firstIndex(where: { $0.id == id }) {
-            playlists[index].addFlashCard()
-        }
+        model.addFlashCard(id)
     }
     
     func flipFlashCard(_ id: UUID) {
-        if let index = flashCards.firstIndex(where: { $0.id == id }) {
-            flashCards[index].flipFlashCard()
+        if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
+            playlists[index].flipFlashCard(id)
         }
     }
     

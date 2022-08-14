@@ -32,11 +32,6 @@ struct FlashCardView: View { // Lernkarten-View, zeigt die Vorderseite bzw. die 
                             .rotation3DEffect(Angle(degrees: flashCard.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
                 }
             }
-//            .onAppear {
-//                UITextView.appearance().backgroundColor = .clear
-//            }
-//            .scaleEffect(flashCard.editMode ? 2 : 1)
-//            .position(x: flashCard.editMode ? geometry.size.width * -0.05 : geometry.size.width * 0.5, y: flashCard.editMode ? geometry.size.height : geometry.size.height * 0.5)
             .rotation3DEffect(Angle(degrees: flashCard.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
         }
     }

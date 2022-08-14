@@ -12,25 +12,22 @@ import NaturalLanguage
 struct PageView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
     @State var selection: UUID
-    var flashCard: FlashCardModel.FlashCard
+//    var flashCard: FlashCardModel.FlashCard
     var playlist: FlashCardModel.Playlist
     
     var body: some View {
         TabView(selection: $selection) {
-            ForEach(viewModel.flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
+            ForEach(playlist.flashCards.reversed()) { flashCard in // Lernkarte innerhalb der Playlist
                 VStack {
-                    FlipButton(flashCardID: flashCard.id)
                     FlashCardView(flashCard: flashCard)
                         .aspectRatio(1, contentMode: .fit)
                         .padding()
-//                        .onTapGesture {
-//                            viewModel.playlistIndex = playlistIndex
-//                            viewModel.flashCardIndex = viewModel.getFlashCardIndex(flashCard.id)!
-//                            withAnimation {
-//                                viewModel.editFlashCard()
-//                                viewModel.flipFlashCard()
-//                            }
-//                        }
+                        .onTapGesture {
+                            viewModel.playlistID = playlist.id
+                            withAnimation {
+                                viewModel.flipFlashCard(flashCard.id)
+                            }
+                        }
                     VoiceOutputButton(flashCard: flashCard)
                 }
                 .tag(flashCard.id)
@@ -39,24 +36,7 @@ struct PageView: View {
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
         .toolbar {
-            DeleteButton(flashCard: flashCard, playlist: playlist)
-        }
-    }
-}
-
-
-struct FlipButton: View {
-    @EnvironmentObject var viewModel: FlashCardViewModel
-    var flashCardID: UUID
-    
-    var body: some View {
-        Button(action: {
-            withAnimation {
-                viewModel.flipFlashCard(flashCardID)
-            }
-        }) {
-            Image(systemName: "arrow.left.arrow.right")
-                .foregroundColor(.blue)
+            DeleteButton(flashCardID: selection, playlist: playlist)
         }
     }
 }
@@ -91,7 +71,7 @@ struct VoiceOutputButton: View {
 struct DeleteButton: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
     @State var alertShown = false
-    var flashCard: FlashCardModel.FlashCard
+    var flashCardID: UUID
     var playlist: FlashCardModel.Playlist
     let alertTitle = "Achtung"
     let alertMessage = "Möchten Sie diese FlashCard wirklich löschen?"
@@ -107,9 +87,9 @@ struct DeleteButton: View {
         .alert(Text(alertTitle), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
             Button(alertButtonTextCancel) { }
             Button(alertButtonTextConfirm) {
-                print("deleted")
+                viewModel.playlistID = playlist.id
                 withAnimation {
-                    viewModel.deleteFlashCard(flashCard.id)
+                    viewModel.deleteFlashCard(flashCardID)
                 }
             }
         }, message: {
