@@ -28,6 +28,7 @@ struct AddFlashCardView: View { // Erste Karte im Raster, zum Hinzufügen neuer 
                 viewModel.addFlashCard(playlist.id)
             }
         }
+        
     }
 }
 

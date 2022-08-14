@@ -12,8 +12,6 @@ class FlashCardViewModel: ObservableObject {
     typealias FlashCard = FlashCardModel.FlashCard
     
     @Published private var model = FlashCardModel() // Initialisierung Model
-    var playlistID = UUID()
-    var flashCardID = UUID()
     
     var alertShown: Bool {
         get { model.alertShown }
@@ -25,21 +23,21 @@ class FlashCardViewModel: ObservableObject {
         set { model.playlists = newValue }
     }
     
-    var flashCards: Array<FlashCard> {
-        get {
-            var array: Array<FlashCard> = []
-            
-            if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
-                array = model.playlists[index].flashCards
-            }
-            return array
-        }
-        set {
-            if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
-                model.playlists[index].flashCards = newValue
-            }
-        }
-    }
+//    var flashCards: Array<FlashCard> {
+//        get {
+//            var array: Array<FlashCard> = []
+//
+//            if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
+//                array = model.playlists[index].flashCards
+//            }
+//            return array
+//        }
+//        set {
+//            if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
+//                model.playlists[index].flashCards = newValue
+//            }
+//        }
+//    }
     
     func addPlaylist(_ name: String) {
         model.addPlaylist(name)
@@ -50,25 +48,29 @@ class FlashCardViewModel: ObservableObject {
     }
     
     func addFlashCard(_ id: UUID) {
-        model.addFlashCard(id)
+        if let index = playlists.firstIndex(where: { $0.id == id }) {
+            playlists[index].addFlashCard()
+        }
     }
     
-    func flipFlashCard(_ id: UUID) {
+    func deleteFlashCard(playlistID : UUID, flashCardID : UUID) {
         if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
-            playlists[index].flipFlashCard(id)
+            playlists[index].deleteFlashCard(flashCardID)
+        }
+        
+    }
+    
+    func flipFlashCard(playlistID : UUID, flashCardID : UUID) {
+        if let playlistIndex = playlists.firstIndex(where: { $0.id == playlistID }) {
+            if let flashCardIndex = playlists[playlistIndex].flashCards.firstIndex(where: { $0.id == flashCardID} ) {
+                playlists[playlistIndex].flashCards[flashCardIndex].flipFlashCard()
+            }
         }
     }
     
 //    func editFlashCard() {
 //        flashCards[flashCardIndex].editFlashCard()
 //    }
-    
-    func deleteFlashCard(_ flashCardID: UUID) {
-        if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
-            playlists[index].deleteFlashCard(flashCardID)
-        }
-        
-    }
 
 }
 

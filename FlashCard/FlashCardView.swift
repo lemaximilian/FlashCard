@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FlashCardView: View { // Lernkarten-View, zeigt die Vorderseite bzw. die Rückseite der Lernkarte
-    @EnvironmentObject var viewModel: FlashCardViewModel
     var flashCard: FlashCardModel.FlashCard
     
     var body: some View {

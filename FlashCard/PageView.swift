@@ -23,21 +23,26 @@ struct PageView: View {
                         .aspectRatio(1, contentMode: .fit)
                         .padding()
                         .onTapGesture {
-                            viewModel.playlistID = playlist.id
                             withAnimation {
-                                viewModel.flipFlashCard(flashCard.id)
+                                viewModel.flipFlashCard(playlistID: playlist.id, flashCardID: flashCard.id)
                             }
                         }
                     VoiceOutputButton(flashCard: flashCard)
                 }
                 .tag(flashCard.id)
+                .toolbar {
+                    HStack {
+                        NavigationLink(destination: EditView(flashCard: flashCard)) {
+                            Image(systemName: "pencil")
+                        }
+                        DeleteButton(flashCardID: selection, playlist: playlist)
+                    }
+                }
             }
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
-        .toolbar {
-            DeleteButton(flashCardID: selection, playlist: playlist)
-        }
+        
     }
 }
 
@@ -73,10 +78,6 @@ struct DeleteButton: View {
     @State var alertShown = false
     var flashCardID: UUID
     var playlist: FlashCardModel.Playlist
-    let alertTitle = "Achtung"
-    let alertMessage = "Möchten Sie diese FlashCard wirklich löschen?"
-    let alertButtonTextConfirm = "Bestätigen"
-    let alertButtonTextCancel = "Abbrechen"
     
     var body: some View {
         Button(action: {
@@ -84,16 +85,15 @@ struct DeleteButton: View {
         }) {
             Image(systemName: "trash")
         }
-        .alert(Text(alertTitle), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
-            Button(alertButtonTextCancel) { }
-            Button(alertButtonTextConfirm) {
-                viewModel.playlistID = playlist.id
+        .alert(Text("Achtung"), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
+            Button("Abbrechen") { }
+            Button("Bestätigen") {
                 withAnimation {
-                    viewModel.deleteFlashCard(flashCardID)
+                    viewModel.deleteFlashCard(playlistID: playlist.id, flashCardID: flashCardID)
                 }
             }
         }, message: {
-            Text(alertMessage)
+            Text("Möchten Sie diese FlashCard wirklich löschen?")
         })
         .foregroundColor(.red)
     }

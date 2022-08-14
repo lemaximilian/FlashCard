@@ -11,9 +11,6 @@ struct AddPlaylistView: View { // View zum Hinzufügen von Playlisten
     @EnvironmentObject var viewModel: FlashCardViewModel
     @Binding var tab: Tab
     @State var userInput: String = ""
-    let alertTitle: String = "Ungültiger Name"
-    let alertMessage: String = "Bitte geben Sie für Ihre Playlist einen Namen ein."
-    let alertButtonText: String = "Bestätigen"
     
     var body: some View {
         VStack {
@@ -36,10 +33,10 @@ struct AddPlaylistView: View { // View zum Hinzufügen von Playlisten
             }) {
                 Text("Playlist erstellen")
             }
-            .alert(Text(alertTitle), isPresented: $viewModel.alertShown, actions: { // Alert bei fehlendem Playlistnamen
-                Button(alertButtonText) { }
+            .alert(Text("Ungültiger Name"), isPresented: $viewModel.alertShown, actions: { // Alert bei fehlendem Playlistnamen
+                Button("Bestätigen") { }
             }, message: {
-                Text(alertMessage)
+                Text("Bitte geben Sie für Ihre Playlist einen Namen ein.")
             })
             .buttonStyle(.borderedProminent)
             .controlSize(.regular)

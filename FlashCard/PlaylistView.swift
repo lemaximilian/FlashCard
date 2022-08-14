@@ -20,9 +20,8 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
                     NavigationLink(destination: PageView(selection: flashCard.id, playlist: playlist)) {
                         FlashCardView(flashCard: flashCard)
                             .aspectRatio(1, contentMode: .fit)
-                            
+                            .transition(.move(edge: .leading))
                     }
-                    .transition(.move(edge: .leading))
                     .buttonStyle(.plain)
                 }
             }

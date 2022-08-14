@@ -20,15 +20,6 @@ struct FlashCardModel {
         if let index = playlists.firstIndex(where: { $0.id == id }) {
             print(index)
             playlists.remove(at: index)
-        } else {
-            print(index)
-        }
-    }
-    
-    mutating func addFlashCard(_ id: UUID) { // fügt eine Lernkarte zum Array flashCards hinzu
-        if let index = playlists.firstIndex(where: { $0.id == id }) {
-            let newFlashCard = FlashCard()
-            playlists[index].flashCards.append(newFlashCard)
         }
     }
     
@@ -37,10 +28,9 @@ struct FlashCardModel {
         var name: String // Name der Playlist
         var flashCards: Array<FlashCard> = [] // Lernkarten innerhalb einer Playlist
         
-        mutating func flipFlashCard(_ id: UUID) { // dreht die Lernkarte um
-            if let index = flashCards.firstIndex(where: { $0.id == id}) {
-                flashCards[index].isFlipped.toggle()
-            }
+        mutating func addFlashCard() { // fügt eine Lernkarte zum Array flashCards hinzu
+            let newFlashCard = FlashCard()
+            flashCards.append(newFlashCard)
         }
         
         mutating func deleteFlashCard(_ id: UUID) { // löscht die Playlist
@@ -52,22 +42,26 @@ struct FlashCardModel {
             }
         }
         
-        mutating func editPlaylistName(newName: String) {
-            
-        }
+//        mutating func editPlaylistName(newName: String) {
+//
+//        }
 
     }
         
     struct FlashCard: Identifiable {
         let id = UUID()
-        var frontContent: String = "Hallo"
-        var backContent: String = "Hello"
+        var frontContent: String = ""
+        var backContent: String = ""
         var isFlipped: Bool = false // wenn false -> Vorderseite, wenn true -> Rückseite
         var editMode: Bool = false
         
-        mutating func editFlashCard() { // ändert den Inhalt der Lernkarte
-            editMode.toggle()
+        mutating func flipFlashCard() { // dreht die Lernkarte um
+            isFlipped.toggle()
         }
+        
+//        mutating func editFlashCard() { // ändert den Inhalt der Lernkarte
+//            editMode.toggle()
+//        }
         
     }
     
