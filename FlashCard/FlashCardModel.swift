@@ -12,13 +12,13 @@ struct FlashCardModel {
     var playlists: Array<Playlist> = [] // Playlists des Users
     
     mutating func addPlaylist(_ name: String) { // fügt eine Playlist zum Array playlists hinzu
-        let newPlaylist = Playlist(name: name)
+        let count = playlists.filter({ $0.name == name }).count
+        let newPlaylist = Playlist(name: name, count: count)
         playlists.append(newPlaylist)
     }
     
     mutating func deletePlaylist(_ id: UUID) { // löscht die Playlist
         if let index = playlists.firstIndex(where: { $0.id == id }) {
-            print(index)
             playlists.remove(at: index)
         }
     }
@@ -27,6 +27,7 @@ struct FlashCardModel {
         let id = UUID()
         var name: String // Name der Playlist
         var flashCards: Array<FlashCard> = [] // Lernkarten innerhalb einer Playlist
+        let count: Int
         
         mutating func addFlashCard() { // fügt eine Lernkarte zum Array flashCards hinzu
             let newFlashCard = FlashCard()
@@ -35,10 +36,7 @@ struct FlashCardModel {
         
         mutating func deleteFlashCard(_ id: UUID) { // löscht die Playlist
             if let index = flashCards.firstIndex(where: { $0.id == id }) {
-                print(index)
                 flashCards.remove(at: index)
-            } else {
-                print(index)
             }
         }
         
@@ -53,7 +51,6 @@ struct FlashCardModel {
         var frontContent: String = ""
         var backContent: String = ""
         var isFlipped: Bool = false // wenn false -> Vorderseite, wenn true -> Rückseite
-        var editMode: Bool = false
         
         mutating func flipFlashCard() { // dreht die Lernkarte um
             isFlipped.toggle()

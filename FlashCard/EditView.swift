@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditView: View {
     @EnvironmentObject var viewModel: FlashCardViewModel
-    @State var text = ""
     @State var flashCard: FlashCardModel.FlashCard
     var playlist: FlashCardModel.Playlist
     @FocusState private var focusedField: Bool

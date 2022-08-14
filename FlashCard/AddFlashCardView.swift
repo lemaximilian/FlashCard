@@ -24,9 +24,7 @@ struct AddFlashCardView: View { // Erste Karte im Raster, zum Hinzufügen neuer 
         }
         .aspectRatio(1, contentMode: .fit)
         .onTapGesture {
-            withAnimation {
-                viewModel.addFlashCard(playlist.id)
-            }
+            viewModel.addFlashCard(playlist.id)
         }
         
     }

@@ -23,9 +23,7 @@ struct PageView: View {
                         .aspectRatio(1, contentMode: .fit)
                         .padding()
                         .onTapGesture {
-                            withAnimation {
-                                viewModel.flipFlashCard(playlistID: playlist.id, flashCardID: flashCard.id)
-                            }
+                            viewModel.flipFlashCard(playlistID: playlist.id, flashCardID: flashCard.id)
                         }
                     VoiceOutputButton(flashCard: flashCard)
                 }

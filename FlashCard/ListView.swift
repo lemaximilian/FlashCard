@@ -17,7 +17,11 @@ struct ListView: View { // View, die die erstellten Playlisten anzeigt
             List {
                 ForEach(viewModel.playlists) { playlist in
                     NavigationLink(destination: PlaylistView(playlist: playlist)) {
-                        Text(playlist.name)
+                        if playlist.count == 0 {
+                            Text(playlist.name)
+                        } else {
+                            Text(playlist.name + "(\(playlist.count))")
+                        }
                     }
                 }
             }

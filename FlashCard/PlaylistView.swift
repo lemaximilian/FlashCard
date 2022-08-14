@@ -21,6 +21,7 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
                         FlashCardView(flashCard: flashCard)
                             .aspectRatio(1, contentMode: .fit)
                             .transition(.move(edge: .leading))
+                            .animation(.easeInOut, value: playlist.flashCards.count)
                     }
                     .buttonStyle(.plain)
                 }
