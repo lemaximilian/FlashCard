@@ -17,7 +17,7 @@ struct SettingsView: View { // Einstellungs-View
                         Text("Kontoeinstellungen")
                     }
                 }
-                NavigationLink(destination: advancedSettingsView()) {
+                NavigationLink(destination: UserInterfaceView(columns: 1)) {
                     HStack {
                         Image(systemName: "iphone")
                         Text("Benutzeroberfläche")
@@ -38,5 +38,17 @@ struct SettingsView: View { // Einstellungs-View
 struct advancedSettingsView: View {
     var body: some View {
         Text("Irgendwelche Einstellungen...")
+    }
+}
+
+struct UserInterfaceView: View {
+    @State var columns: Int
+    
+    var body: some View {
+        HStack {
+            Text("Anzahl der Spalten: ")
+            Stepper("\(columns)", value: $columns, in: 1...3)
+        }
+        .padding()
     }
 }

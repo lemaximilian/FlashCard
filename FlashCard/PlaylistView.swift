@@ -30,20 +30,27 @@ struct PlaylistView: View { // Playlist-View, zeigt alle Lernkarten der Playlist
         .navigationTitle(playlist.name)
         .padding()
         .toolbar {
-            Button(action: {
-                alertShown.toggle()
-            }) {
-                Image(systemName: "trash")
-            }
-            .alert(Text("Achtung"), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
-                Button("Abbrechen") { }
-                Button("Bestätigen") {
-                    viewModel.deletePlaylist(playlist.id)
+            HStack {
+                if playlist.flashCards.count >= 2 {
+                    NavigationLink(destination: ShuffleView(selection: 1, playlist: playlist)) {
+                        Image(systemName: "play.fill")
+                    }
                 }
-            }, message: {
-                Text("Möchten Sie diese Playlist wirklich löschen?")
-            })
-            .foregroundColor(.red)
+                Button(action: {
+                    alertShown.toggle()
+                }) {
+                    Image(systemName: "trash")
+                }
+                .alert(Text("Achtung"), isPresented: $alertShown, actions: { // Alert bei fehlendem Playlistnamen
+                    Button("Abbrechen") { }
+                    Button("Bestätigen") {
+                        viewModel.deletePlaylist(playlist.id)
+                    }
+                }, message: {
+                    Text("Möchten Sie diese Playlist wirklich löschen?")
+                })
+                .foregroundColor(.red)
+            }
         }
     }
 }
