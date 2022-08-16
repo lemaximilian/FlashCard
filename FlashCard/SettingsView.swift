@@ -45,10 +45,14 @@ struct UserInterfaceView: View {
     @State var columns: Int
     
     var body: some View {
-        HStack {
-            Text("Anzahl der Spalten: ")
-            Stepper("\(columns)", value: $columns, in: 1...3)
+        VStack {
+            HStack {
+                Text("Anzahl der Spalten: ")
+                    .bold()
+                Stepper("\(columns)", value: $columns, in: 1...3)
+            }
+            .padding()
+            Spacer()
         }
-        .padding()
     }
 }
