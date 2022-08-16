@@ -39,10 +39,6 @@ struct FlashCardModel {
                 flashCards.remove(at: index)
             }
         }
-        
-//        mutating func editPlaylistName(newName: String) {
-//
-//        }
 
     }
         

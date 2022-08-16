@@ -23,22 +23,6 @@ class FlashCardViewModel: ObservableObject {
         set { model.playlists = newValue }
     }
     
-//    var flashCards: Array<FlashCard> {
-//        get {
-//            var array: Array<FlashCard> = []
-//
-//            if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
-//                array = model.playlists[index].flashCards
-//            }
-//            return array
-//        }
-//        set {
-//            if let index = playlists.firstIndex(where: { $0.id == playlistID }) {
-//                model.playlists[index].flashCards = newValue
-//            }
-//        }
-//    }
-    
     func addPlaylist(_ name: String) {
         model.addPlaylist(name)
     }
