@@ -13,13 +13,4 @@ struct DrawingConstants { // Konstanten für ViewModifier etc.
     static let gridItemSize: CGFloat = 150 // 200 = 1, 150 = 2, 100 = 3
     static let minimumScaleFactor: CGFloat = 0.4
 }
-
-struct ExecuteCode : View {
-    init( _ codeToExec: () -> () ) {
-        codeToExec()
-    }
     
-    var body: some View {
-        return EmptyView()
-    }
-}
